@@ -8,30 +8,26 @@
 
 import UIKit
 
-protocol ListCharactersBusinessLogic
-{
-  func doSomething(request: ListCharacters.Something.Request)
+protocol ListCharactersBusinessLogic {
+    func fetchCharacters(request: ListCharacters.FetchCharacters.Request)
 }
 
-protocol ListCharactersDataStore
-{
-  //var name: String { get set }
+protocol ListCharactersDataStore {
+    var characters: [Character]? { get }
 }
 
-class ListCharactersInteractor: ListCharactersBusinessLogic, ListCharactersDataStore
-{
-  var presenter: ListCharactersPresentationLogic?
-  var worker: ListCharactersWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: ListCharacters.Something.Request)
-  {
-    worker = ListCharactersWorker()
-    worker?.doSomeWork()
+class ListCharactersInteractor: ListCharactersBusinessLogic, ListCharactersDataStore {
+    var presenter: ListCharactersPresentationLogic?
     
-    let response = ListCharacters.Something.Response()
-    presenter?.presentSomething(response: response)
-  }
+    var worker = CharactersWorker(charactersAPI: CharactersAPI())
+    var characters: [Character]?
+    
+    // MARK: - Fetch characters
+    func fetchCharacters(request: ListCharacters.FetchCharacters.Request) {
+        worker.fetchCharacters { (characters) -> Void in
+            self.characters = characters
+            let response = ListCharacters.FetchCharacters.Response(characters: characters)
+            self.presenter?.presentFetchedCharacters(response: response)
+        }
+    }
 }

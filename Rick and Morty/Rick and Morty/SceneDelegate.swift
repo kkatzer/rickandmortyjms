@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let listCharactersNavigation = UINavigationController(nibName: nil, bundle: nil)
         listCharactersNavigation.viewControllers = [ListCharactersViewController()]
+        listCharactersNavigation.navigationBar.prefersLargeTitles = true
         
 //        let locationNavigation = UINavigationController(nibName: nil, bundle: nil)
 //        locationNavigation.viewControllers = [LocationListViewController()]
@@ -29,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        episodeNavigation.viewControllers = [EpisodeListViewController()]
 
         tabBarVC.viewControllers = [listCharactersNavigation]
-        window?.rootViewController = tabBarVC
+        window?.rootViewController = listCharactersNavigation
         window?.makeKeyAndVisible()
         
         guard let _ = (scene as? UIWindowScene) else { return }
