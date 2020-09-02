@@ -8,11 +8,16 @@
 
 import UIKit
 
-class ListCharactersView: UIView {
+class ListCharactersView: UICollectionView {
 
-    init() {
-        super.init(frame: .zero)
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout?) {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 20
+        super.init(frame: frame, collectionViewLayout: layout)
         setupView()
+        
+//        register(CollectionCell.self, forCellWithReuseIdentifier: "characterCell")
     }
     
     required init?(coder: NSCoder) {
@@ -30,6 +35,6 @@ extension ListCharactersView: CodeView {
     }
     
     func setupAdditionalConfiguration() {
-        backgroundColor = .blue
+        backgroundColor = .red
     }
 }

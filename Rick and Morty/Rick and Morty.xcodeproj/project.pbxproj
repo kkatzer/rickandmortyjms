@@ -22,6 +22,12 @@
 		1FA6870224FEFCF900B23108 /* ListCharactersWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA686FD24FEFCF900B23108 /* ListCharactersWorker.swift */; };
 		1FA6870524FEFF3600B23108 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6870424FEFF3600B23108 /* CodeView.swift */; };
 		1FA6870724FEFFDE00B23108 /* ListCharactersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6870624FEFFDE00B23108 /* ListCharactersView.swift */; };
+		1FA6870924FF0A0400B23108 /* ListCharactersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6870824FF0A0400B23108 /* ListCharactersViewCell.swift */; };
+		1FA6870C24FF0D4200B23108 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6870B24FF0D4200B23108 /* Character.swift */; };
+		1FA6870F24FF157500B23108 /* CharactersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6870E24FF157500B23108 /* CharactersAPI.swift */; };
+		1FA6871224FF15C100B23108 /* CharactersWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA6871124FF15C100B23108 /* CharactersWorker.swift */; };
+		1FE6557A2500253A008573AB /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE655792500253A008573AB /* Decoder.swift */; };
+		1FE6557C25002B06008573AB /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6557B25002B06008573AB /* ImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +69,12 @@
 		1FA686FD24FEFCF900B23108 /* ListCharactersWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCharactersWorker.swift; sourceTree = "<group>"; };
 		1FA6870424FEFF3600B23108 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		1FA6870624FEFFDE00B23108 /* ListCharactersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCharactersView.swift; sourceTree = "<group>"; };
+		1FA6870824FF0A0400B23108 /* ListCharactersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCharactersViewCell.swift; sourceTree = "<group>"; };
+		1FA6870B24FF0D4200B23108 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		1FA6870E24FF157500B23108 /* CharactersAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersAPI.swift; sourceTree = "<group>"; };
+		1FA6871124FF15C100B23108 /* CharactersWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersWorker.swift; sourceTree = "<group>"; };
+		1FE655792500253A008573AB /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		1FE6557B25002B06008573AB /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +125,9 @@
 		1FA686C324FEED5C00B23108 /* Rick and Morty */ = {
 			isa = PBXGroup;
 			children = (
+				1FA6871024FF15B100B23108 /* Workers */,
+				1FA6870D24FF155F00B23108 /* Services */,
+				1FA6870A24FF0D3100B23108 /* Models */,
 				1FA6870324FEFF2000B23108 /* Utils */,
 				1FA686F424FEFB7900B23108 /* Scenes */,
 				1FA686C424FEED5C00B23108 /* AppDelegate.swift */,
@@ -161,6 +176,7 @@
 				1FA686FD24FEFCF900B23108 /* ListCharactersWorker.swift */,
 				1FA686F724FEFC2000B23108 /* ListCharactersViewController.swift */,
 				1FA6870624FEFFDE00B23108 /* ListCharactersView.swift */,
+				1FA6870824FF0A0400B23108 /* ListCharactersViewCell.swift */,
 			);
 			path = ListCharacters;
 			sourceTree = "<group>";
@@ -169,8 +185,34 @@
 			isa = PBXGroup;
 			children = (
 				1FA6870424FEFF3600B23108 /* CodeView.swift */,
+				1FE655792500253A008573AB /* Decoder.swift */,
+				1FE6557B25002B06008573AB /* ImageExtension.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		1FA6870A24FF0D3100B23108 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1FA6870B24FF0D4200B23108 /* Character.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1FA6870D24FF155F00B23108 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1FA6870E24FF157500B23108 /* CharactersAPI.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1FA6871024FF15B100B23108 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				1FA6871124FF15C100B23108 /* CharactersWorker.swift */,
+			);
+			path = Workers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,16 +345,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FA6870C24FF0D4200B23108 /* Character.swift in Sources */,
 				1FA686F824FEFC2000B23108 /* ListCharactersViewController.swift in Sources */,
 				1FA686C924FEED5C00B23108 /* ViewController.swift in Sources */,
+				1FA6870924FF0A0400B23108 /* ListCharactersViewCell.swift in Sources */,
+				1FA6871224FF15C100B23108 /* CharactersWorker.swift in Sources */,
+				1FA6870F24FF157500B23108 /* CharactersAPI.swift in Sources */,
 				1FA6870724FEFFDE00B23108 /* ListCharactersView.swift in Sources */,
 				1FA6870124FEFCF900B23108 /* ListCharactersRouter.swift in Sources */,
 				1FA6870524FEFF3600B23108 /* CodeView.swift in Sources */,
+				1FE6557C25002B06008573AB /* ImageExtension.swift in Sources */,
 				1FA6870224FEFCF900B23108 /* ListCharactersWorker.swift in Sources */,
 				1FA686C524FEED5C00B23108 /* AppDelegate.swift in Sources */,
 				1FA686FE24FEFCF900B23108 /* ListCharactersInteractor.swift in Sources */,
 				1FA686C724FEED5C00B23108 /* SceneDelegate.swift in Sources */,
 				1FA6870024FEFCF900B23108 /* ListCharactersPresenter.swift in Sources */,
+				1FE6557A2500253A008573AB /* Decoder.swift in Sources */,
 				1FA686FF24FEFCF900B23108 /* ListCharactersModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
