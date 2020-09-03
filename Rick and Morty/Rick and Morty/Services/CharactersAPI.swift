@@ -17,31 +17,24 @@ struct CharacterListCodable: Codable {
     }
     
     struct Character: Codable {
+        struct CharacterLocation: Codable {
+            let name: String
+            let url: String
+        }
+        
         let id: Int
         let name: String
         let status: String
+        let species: String
+        let type: String
+        let gender: String
+        let origin: CharacterLocation
+        let location: CharacterLocation
         let image: String
     }
     
     let info: Info
     let results: [Character]
-}
-
-struct CharacterCodable: Codable {
-    struct CharacterLocation: Codable {
-        let name: String
-        let url: String
-    }
-    
-    let id: Int
-    let name: String
-    let status: String
-    let species: String
-    let type: String
-    let gender: String
-    let origin: CharacterLocation
-    let location: CharacterLocation
-    let image: String
 }
 
 class CharactersAPI: CharactersProtocol {
@@ -51,18 +44,18 @@ class CharactersAPI: CharactersProtocol {
     
     var page: Int = 1
     
-    var characters: [Character] = []
+    static var characters: [Character] = []
     
     static var favorites: [Int] = []
     
     func fetchCharacters(isFirstPage: Bool, completionHandler: @escaping (() throws -> [Character]) -> Void) {
         if (isFirstPage) {
             page = 1
-            characters = []
+            type(of: self).characters = []
         }
         
         if (page == 0) {
-            completionHandler { return self.characters }
+            completionHandler { return type(of: self).characters }
             return
         }
         
@@ -81,9 +74,9 @@ class CharactersAPI: CharactersProtocol {
                         self.page = 0
                     }
                     for char in decodedData.results {
-                        self.characters.append(Character(id: char.id, name: char.name, status: char.status, image: char.image, favorite: type(of: self).favorites.contains(char.id)))
+                        type(of: self).characters.append(Character(id: char.id, name: char.name, status: char.status, species: char.species, type: char.type, gender: char.gender, origin: char.origin.name, location: char.location.name, image: char.image, favorite: type(of: self).favorites.contains(char.id)))
                     }
-                    completionHandler { return self.characters }
+                    completionHandler { return type(of: self).characters }
                 } catch let error {
                     completionHandler { throw APIError.CannotFetch(error.localizedDescription) }
                 }
@@ -94,19 +87,10 @@ class CharactersAPI: CharactersProtocol {
     }
     
     func fetchCharacter(id: Int, completionHandler: @escaping (() throws -> Character?) -> Void) {
-        decoder.loadJson(fromURLString: CharactersAPI.url + String(id)) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let decodedData = try JSONDecoder().decode(CharacterCodable.self, from: data)
-                    let character = Character(id: decodedData.id, name: decodedData.name, status: decodedData.status, species: decodedData.species, type: decodedData.type, gender: decodedData.gender, origin: decodedData.origin.name, location: decodedData.location.name, image: decodedData.image, favorite: type(of: self).favorites.contains(decodedData.id))
-                    completionHandler { return character }
-                } catch let error {
-                    completionHandler { throw APIError.CannotFetch(error.localizedDescription) }
-                }
-            case .failure(let error):
-                completionHandler { throw APIError.CannotFetch(error.localizedDescription) }
-            }
+        if let index = indexOfCharacterWithID(id: id) {
+            completionHandler { return type(of: self).characters[index] }
+        } else {
+            completionHandler { throw APIError.CannotFetch("Character with id \(id) not found") }
         }
     }
     
@@ -118,5 +102,11 @@ class CharactersAPI: CharactersProtocol {
             type(of: self).favorites.append(id)
             completionHandler { return true }
         }
+    }
+    
+    // MARK: - Convenience methods
+    
+    private func indexOfCharacterWithID(id: Int?) -> Int? {
+        return type(of: self).characters.firstIndex { return $0.id == id }
     }
 }
