@@ -37,9 +37,12 @@ class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLo
     
     private func setup() {
         let viewController = self
+        let view = ShowCharacterView()
         let interactor = ShowCharacterInteractor()
         let presenter = ShowCharacterPresenter()
         let router = ShowCharacterRouter()
+        view.dataSource = self
+        viewController.tableView = view
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
@@ -47,16 +50,48 @@ class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLo
         router.viewController = viewController
         router.dataStore = interactor
         
-        self.view.backgroundColor = .red
+        navigationItem.title = ""
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     // MARK: View lifecycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getCharacter()
+    }
     
+    // MARK: Get character
     
-    // MARK: Do something
+    func getCharacter() {
+        let request = ShowCharacter.GetCharacter.Request()
+        interactor?.getCharacter(request: request)
+    }
+    
+    var displayedCharacter: ShowCharacter.GetCharacter.ViewModel.DisplayedCharacter?
     
     func displayCharacter(viewModel: ShowCharacter.GetCharacter.ViewModel) {
-        //nameTextField.text = viewModel.name
+        displayedCharacter = viewModel.displayedCharacter
+        self.tableView.reloadData()
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = ShowCharacterHeaderView()
+        guard let displayedCharacter = displayedCharacter else {
+            return headerView
+        }
+        headerView.avatar.downloaded(from: displayedCharacter.image, contentMode: .scaleAspectFill)
+        headerView.status.text = displayedCharacter.status
+        headerView.name.text = displayedCharacter.name
+        headerView.species.text = displayedCharacter.species
+        return headerView
     }
 }

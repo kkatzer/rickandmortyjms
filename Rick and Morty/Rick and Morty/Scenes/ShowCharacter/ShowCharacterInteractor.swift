@@ -24,7 +24,7 @@ class ShowCharacterInteractor: ShowCharacterBusinessLogic, ShowCharacterDataStor
     
     // MARK: - Fetch characters
     func getCharacter(request: ShowCharacter.GetCharacter.Request) {
-        worker.fetchCharacter(characterToFetch: request.characterId) { (character) -> Void in
+        worker.fetchCharacter(characterToFetch: character.id) { (character) -> Void in
             guard let character = character else { return }
             self.character = character
             let response = ShowCharacter.GetCharacter.Response(character: character)

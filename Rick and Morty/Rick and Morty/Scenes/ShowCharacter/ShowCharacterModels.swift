@@ -14,7 +14,6 @@ enum ShowCharacter {
     enum GetCharacter {
         
         struct Request {
-            var characterId: Int
         }
         
         struct Response {
