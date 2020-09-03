@@ -37,6 +37,19 @@ class ListCharactersViewCell: UICollectionViewCell {
         return view
     }()
     
+    let favoriteIcon: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(systemName: "star.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .large))?.withTintColor(.yellow, renderingMode: .alwaysOriginal)
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 2, height: 2)
+        view.layer.shadowOpacity = 0.33
+        view.layer.shadowRadius = 3
+        view.layer.masksToBounds = false
+        view.isHidden = true
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupView()
@@ -50,6 +63,7 @@ class ListCharactersViewCell: UICollectionViewCell {
 extension ListCharactersViewCell: CodeView {
     func buildViewHierarchy() {
         addSubview(image)
+        image.addSubview(favoriteIcon)
         addSubview(status)
         addSubview(title)
     }
@@ -61,6 +75,10 @@ extension ListCharactersViewCell: CodeView {
             image.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             image.topAnchor.constraint(equalTo: contentView.topAnchor),
             image.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: (1/1.15)),
+            
+            //favoriteIcon
+            favoriteIcon.topAnchor.constraint(equalTo: image.topAnchor, constant: 9),
+            favoriteIcon.trailingAnchor.constraint(equalTo: image.trailingAnchor, constant: -9),
             
             //status
             status.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),

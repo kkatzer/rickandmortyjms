@@ -103,6 +103,7 @@ class ListCharactersViewController: UICollectionViewController, ListCharactersDi
         characterCell.title.text = displayedCharacter.name
         characterCell.status.text = displayedCharacter.status
         characterCell.image.downloaded(from: displayedCharacter.image, contentMode: .scaleAspectFill)
+        characterCell.favoriteIcon.isHidden = !displayedCharacter.favorite
         return characterCell
     }
     
