@@ -12,7 +12,6 @@
 		1FA686C924FEED5C00B23108 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA686C824FEED5C00B23108 /* ViewController.swift */; };
 		1FA686CE24FEED6200B23108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA686CD24FEED6200B23108 /* Assets.xcassets */; };
 		1FA686D124FEED6200B23108 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA686CF24FEED6200B23108 /* LaunchScreen.storyboard */; };
-		1FA686DC24FEED6200B23108 /* Rick_and_MortyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA686DB24FEED6200B23108 /* Rick_and_MortyTests.swift */; };
 		1FA686E724FEED6200B23108 /* Rick_and_MortyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA686E624FEED6200B23108 /* Rick_and_MortyUITests.swift */; };
 		1FA686F824FEFC2000B23108 /* ListCharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA686F724FEFC2000B23108 /* ListCharactersViewController.swift */; };
 		1FA686FE24FEFCF900B23108 /* ListCharactersInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA686F924FEFCF900B23108 /* ListCharactersInteractor.swift */; };
@@ -37,6 +36,8 @@
 		1FE90A3625009E8B00690E62 /* ShowCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE90A3525009E8B00690E62 /* ShowCharacterView.swift */; };
 		1FE90A3825009EF500690E62 /* ShowCharacterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE90A3725009EF500690E62 /* ShowCharacterViewCell.swift */; };
 		1FE90A3A2500A2B500690E62 /* ShowCharacterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE90A392500A2B500690E62 /* ShowCharacterHeaderView.swift */; };
+		1FE90A412501912300690E62 /* Seeds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE90A402501912300690E62 /* Seeds.swift */; };
+		1FE90A442501925400690E62 /* CharactersAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE90A432501925400690E62 /* CharactersAPITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +66,6 @@
 		1FA686D024FEED6200B23108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FA686D224FEED6200B23108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FA686D724FEED6200B23108 /* Rick and MortyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rick and MortyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FA686DB24FEED6200B23108 /* Rick_and_MortyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rick_and_MortyTests.swift; sourceTree = "<group>"; };
 		1FA686DD24FEED6200B23108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FA686E224FEED6200B23108 /* Rick and MortyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rick and MortyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA686E624FEED6200B23108 /* Rick_and_MortyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rick_and_MortyUITests.swift; sourceTree = "<group>"; };
@@ -93,6 +93,8 @@
 		1FE90A3525009E8B00690E62 /* ShowCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCharacterView.swift; sourceTree = "<group>"; };
 		1FE90A3725009EF500690E62 /* ShowCharacterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCharacterViewCell.swift; sourceTree = "<group>"; };
 		1FE90A392500A2B500690E62 /* ShowCharacterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCharacterHeaderView.swift; sourceTree = "<group>"; };
+		1FE90A402501912300690E62 /* Seeds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seeds.swift; sourceTree = "<group>"; };
+		1FE90A432501925400690E62 /* CharactersAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersAPITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,8 +163,9 @@
 		1FA686DA24FEED6200B23108 /* Rick and MortyTests */ = {
 			isa = PBXGroup;
 			children = (
-				1FA686DB24FEED6200B23108 /* Rick_and_MortyTests.swift */,
+				1FE90A422501924500690E62 /* Services */,
 				1FA686DD24FEED6200B23108 /* Info.plist */,
+				1FE90A402501912300690E62 /* Seeds.swift */,
 			);
 			path = "Rick and MortyTests";
 			sourceTree = "<group>";
@@ -248,6 +251,14 @@
 				1FE90A392500A2B500690E62 /* ShowCharacterHeaderView.swift */,
 			);
 			path = ShowCharacter;
+			sourceTree = "<group>";
+		};
+		1FE90A422501924500690E62 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1FE90A432501925400690E62 /* CharactersAPITests.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,7 +424,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FA686DC24FEED6200B23108 /* Rick_and_MortyTests.swift in Sources */,
+				1FE90A412501912300690E62 /* Seeds.swift in Sources */,
+				1FE90A442501925400690E62 /* CharactersAPITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
