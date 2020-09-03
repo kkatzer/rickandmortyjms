@@ -23,18 +23,23 @@ class ListCharactersRouter: NSObject, ListCharactersRoutingLogic, ListCharacters
     // MARK: Routing
     
     func routeToShowCharacter() {
-        //TODO
+        let destinationVC = ShowCharacterViewController()
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToShowCharacter(source: dataStore!, destination: &destinationDS)
+        navigateToShowCharacter(source: viewController!, destination: destinationVC)
+        
     }
     
     // MARK: Navigation
     
-//    func navigateToShowCharacter(source: ListCharactersViewController, destination: SomewhereViewController) {
-//        source.show(destination, sender: nil)
-//    }
-//
-//    // MARK: Passing data
-//
-//    func passDataToSomewhere(source: ListCharactersDataStore, destination: inout SomewhereDataStore) {
-//        destination.name = source.name
-//    }
+    func navigateToShowCharacter(source: ListCharactersViewController, destination: ShowCharacterViewController) {
+        source.show(destination, sender: nil)
+    }
+
+    // MARK: Passing data
+
+    func passDataToShowCharacter(source: ListCharactersDataStore, destination: inout ShowCharacterDataStore) {
+        let selectedRow = viewController?.collectionView.indexPathsForSelectedItems?.first?.row
+        destination.character = source.characters?[selectedRow!]
+    }
 }

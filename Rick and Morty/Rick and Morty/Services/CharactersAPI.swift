@@ -79,7 +79,7 @@ class CharactersAPI: CharactersProtocol {
                         self.page = 0
                     }
                     for char in decodedData.results {
-                        self.characters.append(Character(id: char.id, name: char.name, status: char.status, image: char.image))
+                        self.characters.append(Character(id: char.id, name: char.name, status: char.status, image: char.image, favorite: false))
                     }
                     completionHandler { return self.characters }
                 } catch let error {
@@ -97,7 +97,7 @@ class CharactersAPI: CharactersProtocol {
             case .success(let data):
                 do {
                     let decodedData = try JSONDecoder().decode(CharacterCodable.self, from: data)
-                    let character = Character(id: decodedData.id, name: decodedData.name, status: decodedData.status, species: decodedData.species, type: decodedData.type, gender: decodedData.gender, origin: decodedData.origin.name, location: decodedData.location.name, image: decodedData.image)
+                    let character = Character(id: decodedData.id, name: decodedData.name, status: decodedData.status, species: decodedData.species, type: decodedData.type, gender: decodedData.gender, origin: decodedData.origin.name, location: decodedData.location.name, image: decodedData.image, favorite: false)
                     completionHandler { return character }
                 } catch let error {
                     completionHandler { throw APIError.CannotFetch(error.localizedDescription) }

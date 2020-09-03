@@ -31,7 +31,7 @@ class ListCharactersViewCell: UICollectionViewCell {
     let title: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = .black
+        view.textColor = #colorLiteral(red: 0.03137254902, green: 0.1215686275, blue: 0.1960784314, alpha: 1)
         view.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         view.numberOfLines = 0
         return view

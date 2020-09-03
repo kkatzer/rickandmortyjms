@@ -9,7 +9,7 @@
 import UIKit
 
 struct Character {
-    init(id: Int, name: String, status: String, species: String? = nil, type: String? = nil, gender: String? = nil, origin: String? = nil, location: String? = nil, image: String) {
+    init(id: Int, name: String, status: String, species: String? = nil, type: String? = nil, gender: String? = nil, origin: String? = nil, location: String? = nil, image: String, favorite: Bool) {
         self.id = id
         self.name = name
         self.status = status
@@ -19,7 +19,7 @@ struct Character {
         self.origin = origin
         self.location = location
         self.image = image
-        self.favorite = false
+        self.favorite = favorite
     }
     
     let id: Int
@@ -31,5 +31,5 @@ struct Character {
     let origin: String?
     let location: String?
     let image: String
-    var favorite: Bool
+    let favorite: Bool
 }
