@@ -15,26 +15,12 @@ class ListCharactersView: UICollectionView {
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 20
         super.init(frame: frame, collectionViewLayout: layout)
-        setupView()
+        backgroundColor = .white
         
-//        register(CollectionCell.self, forCellWithReuseIdentifier: "characterCell")
+        register(ListCharactersViewCell.self, forCellWithReuseIdentifier: "CharacterCollectionViewCell")
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension ListCharactersView: CodeView {
-    func buildViewHierarchy() {
-        
-    }
-    
-    func setupConstraints() {
-        
-    }
-    
-    func setupAdditionalConfiguration() {
-        backgroundColor = .red
     }
 }

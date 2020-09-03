@@ -8,20 +8,22 @@
 
 import UIKit
 
-protocol ListCharactersPresentationLogic
-{
-  func presentSomething(response: ListCharacters.Something.Response)
+protocol ListCharactersPresentationLogic {
+    func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response)
 }
 
-class ListCharactersPresenter: ListCharactersPresentationLogic
-{
-  weak var viewController: ListCharactersDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentSomething(response: ListCharacters.Something.Response)
-  {
-    let viewModel = ListCharacters.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+class ListCharactersPresenter: ListCharactersPresentationLogic {
+    weak var viewController: ListCharactersDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response) {
+        var displayedCharacters: [ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter] = []
+        for character in response.characters {
+            let displayedCharacter = ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter(id: character.id, name: character.name, status: character.status, image: character.image)
+            displayedCharacters.append(displayedCharacter)
+        }
+        let viewModel = ListCharacters.FetchCharacters.ViewModel(displayedCharacters: displayedCharacters)
+        viewController?.displayFetchedCharacters(viewModel: viewModel)
+    }
 }

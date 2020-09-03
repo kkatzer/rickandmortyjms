@@ -49,26 +49,39 @@ class CharactersAPI: CharactersProtocol {
     
     static var url = "https://rickandmortyapi.com/api/character/"
     
-    lazy var nextUrl = CharactersAPI.url
+    var page: Int = 1
     
-    func fetchCharacters(page: Int, completionHandler: @escaping (() throws -> [Character]) -> Void) {
+    var characters: [Character] = []
+    
+    func fetchCharacters(isFirstPage: Bool, completionHandler: @escaping (() throws -> [Character]) -> Void) {
+        if (isFirstPage) {
+            page = 1
+            characters = []
+        }
         
-        var characters: [Character] = []
+        if (page == 0) {
+            completionHandler { return self.characters }
+            return
+        }
         
-        decoder.loadJson(fromURLString: nextUrl) { result in
+        decoder.loadJson(fromURLString: CharactersAPI.url + "?page=\(page)") { result in
             switch result {
             case .success(let data):
                 do {
                     let decodedData = try JSONDecoder().decode(CharacterListCodable.self, from: data)
                     if let next = decodedData.info.next {
-                        self.nextUrl = next
+                        if let page = Int(String(next.suffix(1))) {
+                            self.page = page
+                        } else {
+                            self.page = 0
+                        }
                     } else {
-                        self.nextUrl = ""
+                        self.page = 0
                     }
                     for char in decodedData.results {
-                        characters.append(Character(id: char.id, name: char.name, status: char.status, image: char.image))
+                        self.characters.append(Character(id: char.id, name: char.name, status: char.status, image: char.image))
                     }
-                    completionHandler { return characters }
+                    completionHandler { return self.characters }
                 } catch let error {
                     completionHandler { throw APIError.CannotFetch(error.localizedDescription) }
                 }

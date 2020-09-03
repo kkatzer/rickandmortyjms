@@ -12,6 +12,7 @@ class ListCharactersViewCell: UICollectionViewCell {
     
     let image: UIImageView = {
         let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.layer.cornerRadius = 8
@@ -21,14 +22,16 @@ class ListCharactersViewCell: UICollectionViewCell {
     
     let status: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor(named: "Gray 1")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = #colorLiteral(red: 0.5568627451, green: 0.5568627451, blue: 0.5764705882, alpha: 1)
         view.font = UIFont.systemFont(ofSize: 11)
         return view
     }()
     
     let title: UILabel = {
         let view = UILabel()
-        view.textColor = UIColor(named: "Black")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
         view.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         view.numberOfLines = 0
         return view
@@ -54,16 +57,16 @@ extension ListCharactersViewCell: CodeView {
     func setupConstraints() {
         let constraints = [
             //image
-            image.leftAnchor.constraint(equalTo: self.leftAnchor),
-            image.rightAnchor.constraint(equalTo: self.rightAnchor),
+            image.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            image.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             image.topAnchor.constraint(equalTo: contentView.topAnchor),
-            image.heightAnchor.constraint(equalTo: image.widthAnchor, multiplier: (1/1.15)),
+            image.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: (1/1.15)),
             
             //status
             status.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),
             status.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 12),
             status.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 12),
-            
+
             //title
             title.leftAnchor.constraint(equalTo: status.leftAnchor),
             title.rightAnchor.constraint(equalTo: status.rightAnchor),
@@ -74,7 +77,7 @@ extension ListCharactersViewCell: CodeView {
     }
     
     func setupAdditionalConfiguration() {
-        layer.borderColor = UIColor(named: "Gray 5")?.cgColor
+        layer.borderColor = #colorLiteral(red: 0.8980392157, green: 0.8980392157, blue: 0.9176470588, alpha: 1)
         layer.borderWidth = 1
         layer.cornerRadius = 8
         backgroundColor = UIColor(named: "White")

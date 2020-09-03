@@ -8,20 +8,27 @@
 
 import UIKit
 
-enum ListCharacters
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
+enum ListCharacters {
+    // MARK: Use cases
+    
+    enum FetchCharacters {
+        
+        struct Request {
+            var isFirstPage: Bool
+        }
+        
+        struct Response {
+            var characters: [Character]
+        }
+        
+        struct ViewModel {
+            struct DisplayedCharacter {
+                var id: Int
+                var name: String
+                var status: String
+                var image: String
+            }
+            var displayedCharacters: [DisplayedCharacter]
+        }
     }
-    struct Response
-    {
-    }
-    struct ViewModel
-    {
-    }
-  }
 }
