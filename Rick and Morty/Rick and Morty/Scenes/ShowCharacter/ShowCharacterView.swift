@@ -11,7 +11,7 @@ import UIKit
 class ShowCharacterView: UITableView {
     
     override init(frame: CGRect = .zero, style: UITableView.Style = .grouped) {
-        super.init(frame: frame, style: style)
+        super.init(frame: frame, style: .grouped)
         
         register(ShowCharacterViewCell.self, forCellReuseIdentifier: "CharacterTableViewCell")
     }

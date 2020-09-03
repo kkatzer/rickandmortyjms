@@ -108,7 +108,10 @@ class ListCharactersViewController: UICollectionViewController, ListCharactersDi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 49)/2
+        var width = (collectionView.frame.width - 49)/2
+        if (width > 200) {
+            width = (collectionView.frame.width - 66)/3
+        }
         let height = width * 1.34
         return CGSize(width: width, height: height)
     }
@@ -121,5 +124,12 @@ class ListCharactersViewController: UICollectionViewController, ListCharactersDi
         if (indexPath.row == displayedCharacters.count - 1) {
             self.fetchCharacters(isFirstPage: false)
         }
+    }
+    
+    //So the layout will be redrawn on rotate
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        flowLayout.invalidateLayout()
     }
 }

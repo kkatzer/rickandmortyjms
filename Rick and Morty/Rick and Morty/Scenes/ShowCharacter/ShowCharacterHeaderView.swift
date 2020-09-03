@@ -86,8 +86,8 @@ extension ShowCharacterHeaderView: CodeView {
         let cons = [
             //headerView
             headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            headerView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
-            headerView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            headerView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            headerView.rightAnchor.constraint(equalTo: self.rightAnchor),
             headerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             //headerImage
