@@ -10,6 +10,7 @@ import UIKit
 
 protocol ShowCharacterDisplayLogic: class {
     func displayCharacter(viewModel: ShowCharacter.GetCharacter.ViewModel)
+    func displayFavorite(viewModel: ShowCharacter.ToggleFavoriteCharacter.ViewModel)
 }
 
 class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLogic {
@@ -51,8 +52,18 @@ class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLo
         router.viewController = viewController
         router.dataStore = interactor
         
+        
+        let filterBtn = UIBarButtonItem()
+        filterBtn.target = self
+        filterBtn.action = #selector(toggleFavorite)
+        navigationItem.rightBarButtonItem = filterBtn
         navigationItem.title = ""
         navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    @objc func toggleFavorite() {
+        let request = ShowCharacter.ToggleFavoriteCharacter.Request()
+        interactor?.toggleFavoriteCharacter(request: request)
     }
     
     // MARK: View lifecycle
@@ -74,6 +85,17 @@ class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLo
     func displayCharacter(viewModel: ShowCharacter.GetCharacter.ViewModel) {
         displayedCharacter = viewModel.displayedCharacter
         self.tableView.reloadData()
+        guard let displayedCharacter = displayedCharacter else { return }
+        setFavoriteIcon(favorite: displayedCharacter.favorite)
+    }
+    
+    func displayFavorite(viewModel: ShowCharacter.ToggleFavoriteCharacter.ViewModel) {
+        let favorite = viewModel.favorite
+        setFavoriteIcon(favorite: favorite)
+    }
+    
+    func setFavoriteIcon(favorite: Bool) {
+        navigationItem.rightBarButtonItem?.image = favorite ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

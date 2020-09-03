@@ -27,6 +27,7 @@ enum ListCharacters {
                 var name: String
                 var status: String
                 var image: String
+                var favorite: Bool
             }
             var displayedCharacters: [DisplayedCharacter]
         }

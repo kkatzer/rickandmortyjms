@@ -20,7 +20,7 @@ class ListCharactersPresenter: ListCharactersPresentationLogic {
     func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response) {
         var displayedCharacters: [ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter] = []
         for character in response.characters {
-            let displayedCharacter = ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter(id: character.id, name: character.name, status: character.status, image: character.image)
+            let displayedCharacter = ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter(id: character.id, name: character.name, status: character.status, image: character.image, favorite: character.favorite)
             displayedCharacters.append(displayedCharacter)
         }
         let viewModel = ListCharacters.FetchCharacters.ViewModel(displayedCharacters: displayedCharacters)

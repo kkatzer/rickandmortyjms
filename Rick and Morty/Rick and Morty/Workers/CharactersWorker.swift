@@ -44,11 +44,27 @@ class CharactersWorker {
             }
         }
     }
+    
+    func toggleFavoriteCharacter(characterToFavorite: Int, completionHandler: @escaping (Bool?) -> Void) {
+        charactersAPI.toggleFavoriteCharacter(id: characterToFavorite) { (favorite: () throws -> Bool?) -> Void in
+            do {
+                let favorite = try favorite()
+                DispatchQueue.main.async {
+                    completionHandler(favorite)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completionHandler(nil)
+                }
+            }
+        }
+    }
 }
 
 protocol CharactersProtocol {
     func fetchCharacters(isFirstPage: Bool, completionHandler: @escaping (() throws -> [Character]) -> Void)
     func fetchCharacter(id: Int, completionHandler: @escaping (() throws -> Character?) -> Void)
+    func toggleFavoriteCharacter(id: Int, completionHandler: @escaping (() throws -> Bool?) -> Void)
 }
 
 enum APIError: Equatable, Error {
