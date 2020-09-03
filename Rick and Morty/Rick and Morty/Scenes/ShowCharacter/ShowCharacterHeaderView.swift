@@ -88,6 +88,7 @@ extension ShowCharacterHeaderView: CodeView {
             headerView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             headerView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             headerView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            headerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
             //headerImage
             headerImage.topAnchor.constraint(equalTo: headerView.topAnchor),

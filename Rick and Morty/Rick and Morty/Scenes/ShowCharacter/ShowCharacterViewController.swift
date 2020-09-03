@@ -43,6 +43,7 @@ class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLo
         let router = ShowCharacterRouter()
         view.dataSource = self
         viewController.tableView = view
+        viewController.tableView.tableFooterView = UIView()
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
@@ -80,7 +81,7 @@ class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLo
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -93,5 +94,29 @@ class ShowCharacterViewController: UITableViewController, ShowCharacterDisplayLo
         headerView.name.text = displayedCharacter.name
         headerView.species.text = displayedCharacter.species
         return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CharacterTableViewCell", for: indexPath)
+        guard let characterCell = cell as? ShowCharacterViewCell else { return cell }
+        guard let displayedCharacter = displayedCharacter else { return cell }
+        
+        switch indexPath.row {
+        case 0:
+            characterCell.title.text = "Gender"
+            characterCell.subtitle.text = displayedCharacter.gender
+        case 1:
+            characterCell.title.text = "Origin"
+            characterCell.subtitle.text = displayedCharacter.origin
+        case 2:
+            characterCell.title.text = "Type"
+            characterCell.subtitle.text = (displayedCharacter.type == "") ? "Unknown" : displayedCharacter.type
+        case 3:
+            characterCell.title.text = "Location"
+            characterCell.subtitle.text = displayedCharacter.location
+        default:
+            print("Error on section switch case")
+        }
+        return characterCell
     }
 }
