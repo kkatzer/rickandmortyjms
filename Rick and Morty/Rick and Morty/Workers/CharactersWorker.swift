@@ -15,8 +15,8 @@ class CharactersWorker {
         self.charactersAPI = charactersAPI
     }
     
-    func fetchCharacters(page: Int = 0, completionHandler: @escaping ([Character]) -> Void) {
-        charactersAPI.fetchCharacters(page: page) { (characters: () throws -> [Character]) -> Void in
+    func fetchCharacters(isFirstPage: Bool, completionHandler: @escaping ([Character]) -> Void) {
+        charactersAPI.fetchCharacters(isFirstPage: isFirstPage) { (characters: () throws -> [Character]) -> Void in
             do {
                 let characters = try characters()
                 DispatchQueue.main.async {
@@ -47,7 +47,7 @@ class CharactersWorker {
 }
 
 protocol CharactersProtocol {
-    func fetchCharacters(page: Int, completionHandler: @escaping (() throws -> [Character]) -> Void)
+    func fetchCharacters(isFirstPage: Bool, completionHandler: @escaping (() throws -> [Character]) -> Void)
     func fetchCharacter(id: Int, completionHandler: @escaping (() throws -> Character?) -> Void)
 }
 

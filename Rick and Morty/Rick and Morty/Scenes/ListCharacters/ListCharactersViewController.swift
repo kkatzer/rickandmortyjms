@@ -71,15 +71,15 @@ class ListCharactersViewController: UICollectionViewController, ListCharactersDi
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchCharacters()
+        fetchCharacters(isFirstPage: true)
     }
     
     // MARK: Do something
     
     var displayedCharacters: [ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter] = []
     
-    func fetchCharacters() {
-        let request = ListCharacters.FetchCharacters.Request()
+    func fetchCharacters(isFirstPage: Bool) {
+        let request = ListCharacters.FetchCharacters.Request(isFirstPage: isFirstPage)
         interactor?.fetchCharacters(request: request)
     }
     
@@ -117,5 +117,11 @@ class ListCharactersViewController: UICollectionViewController, ListCharactersDi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 16, left: 17, bottom: 0, right: 17)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (indexPath.row == displayedCharacters.count - 1) {
+            self.fetchCharacters(isFirstPage: false)
+        }
     }
 }

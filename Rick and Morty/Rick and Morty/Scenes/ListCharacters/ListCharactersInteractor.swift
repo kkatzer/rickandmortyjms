@@ -24,7 +24,7 @@ class ListCharactersInteractor: ListCharactersBusinessLogic, ListCharactersDataS
     
     // MARK: - Fetch characters
     func fetchCharacters(request: ListCharacters.FetchCharacters.Request) {
-        worker.fetchCharacters { (characters) -> Void in
+        worker.fetchCharacters(isFirstPage: request.isFirstPage) { (characters) -> Void in
             self.characters = characters
             let response = ListCharacters.FetchCharacters.Response(characters: characters)
             self.presenter?.presentFetchedCharacters(response: response)

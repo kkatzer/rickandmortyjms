@@ -14,6 +14,7 @@ enum ListCharacters {
     enum FetchCharacters {
         
         struct Request {
+            var isFirstPage: Bool
         }
         
         struct Response {
