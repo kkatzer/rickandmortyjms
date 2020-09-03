@@ -1,14 +1,14 @@
 //
-//  ListCharactersWorker.swift
+//  ShowCharacterWorker.swift
 //  Rick and Morty
 //
-//  Created by Kevin Katzer on 01/09/20.
+//  Created by Kevin Katzer on 02/09/20.
 //  Copyright © 2020 kkatzer. All rights reserved.
 //
 
 import UIKit
 
-class ListCharactersWorker {
+class ShowCharacterWorker {
   func doSomeWork() {
   }
 }
