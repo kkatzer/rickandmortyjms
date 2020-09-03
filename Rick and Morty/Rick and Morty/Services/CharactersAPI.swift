@@ -53,6 +53,8 @@ class CharactersAPI: CharactersProtocol {
     
     var characters: [Character] = []
     
+    static var favorites: [Int] = []
+    
     func fetchCharacters(isFirstPage: Bool, completionHandler: @escaping (() throws -> [Character]) -> Void) {
         if (isFirstPage) {
             page = 1
@@ -79,7 +81,7 @@ class CharactersAPI: CharactersProtocol {
                         self.page = 0
                     }
                     for char in decodedData.results {
-                        self.characters.append(Character(id: char.id, name: char.name, status: char.status, image: char.image, favorite: false))
+                        self.characters.append(Character(id: char.id, name: char.name, status: char.status, image: char.image, favorite: type(of: self).favorites.contains(char.id)))
                     }
                     completionHandler { return self.characters }
                 } catch let error {
@@ -97,7 +99,7 @@ class CharactersAPI: CharactersProtocol {
             case .success(let data):
                 do {
                     let decodedData = try JSONDecoder().decode(CharacterCodable.self, from: data)
-                    let character = Character(id: decodedData.id, name: decodedData.name, status: decodedData.status, species: decodedData.species, type: decodedData.type, gender: decodedData.gender, origin: decodedData.origin.name, location: decodedData.location.name, image: decodedData.image, favorite: false)
+                    let character = Character(id: decodedData.id, name: decodedData.name, status: decodedData.status, species: decodedData.species, type: decodedData.type, gender: decodedData.gender, origin: decodedData.origin.name, location: decodedData.location.name, image: decodedData.image, favorite: type(of: self).favorites.contains(decodedData.id))
                     completionHandler { return character }
                 } catch let error {
                     completionHandler { throw APIError.CannotFetch(error.localizedDescription) }
@@ -105,6 +107,16 @@ class CharactersAPI: CharactersProtocol {
             case .failure(let error):
                 completionHandler { throw APIError.CannotFetch(error.localizedDescription) }
             }
+        }
+    }
+    
+    func toggleFavoriteCharacter(id: Int, completionHandler: @escaping (() throws -> Bool?) -> Void) {
+        if let index = type(of: self).favorites.firstIndex(of: id) {
+            type(of: self).favorites.remove(at: index)
+            completionHandler { return false }
+        } else {
+            type(of: self).favorites.append(id)
+            completionHandler { return true }
         }
     }
 }

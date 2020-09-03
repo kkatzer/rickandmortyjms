@@ -10,6 +10,7 @@ import UIKit
 
 protocol ShowCharacterBusinessLogic {
     func getCharacter(request: ShowCharacter.GetCharacter.Request)
+    func toggleFavoriteCharacter(request: ShowCharacter.ToggleFavoriteCharacter.Request)
 }
 
 protocol ShowCharacterDataStore {
@@ -29,6 +30,15 @@ class ShowCharacterInteractor: ShowCharacterBusinessLogic, ShowCharacterDataStor
             self.character = character
             let response = ShowCharacter.GetCharacter.Response(character: character)
             self.presenter?.presentFetchedCharacter(response: response)
+        }
+    }
+    
+    // MARK: - Toggle favorite character
+    func toggleFavoriteCharacter(request: ShowCharacter.ToggleFavoriteCharacter.Request) {
+        worker.toggleFavoriteCharacter(characterToFavorite: character.id) { (favorite) -> Void in
+            guard let favorite = favorite else { return }
+            let response = ShowCharacter.ToggleFavoriteCharacter.Response(favorite: favorite)
+            self.presenter?.presentFavorite(response: response)
         }
     }
 }

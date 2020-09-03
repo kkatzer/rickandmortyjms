@@ -10,9 +10,11 @@ import UIKit
 
 protocol ShowCharacterPresentationLogic {
     func presentFetchedCharacter(response: ShowCharacter.GetCharacter.Response)
+    func presentFavorite(response: ShowCharacter.ToggleFavoriteCharacter.Response)
 }
 
 class ShowCharacterPresenter: ShowCharacterPresentationLogic {
+    
     weak var viewController: ShowCharacterDisplayLogic?
     
     // MARK: Do something
@@ -24,5 +26,11 @@ class ShowCharacterPresenter: ShowCharacterPresentationLogic {
         
         let viewModel = ShowCharacter.GetCharacter.ViewModel(displayedCharacter: displayedCharacter)
         viewController?.displayCharacter(viewModel: viewModel)
+    }
+    
+    func presentFavorite(response: ShowCharacter.ToggleFavoriteCharacter.Response) {
+        let favorite = response.favorite
+        let viewModel = ShowCharacter.ToggleFavoriteCharacter.ViewModel(favorite: favorite)
+        viewController?.displayFavorite(viewModel: viewModel)
     }
 }

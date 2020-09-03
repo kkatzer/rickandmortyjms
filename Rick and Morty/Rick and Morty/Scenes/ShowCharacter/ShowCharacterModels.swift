@@ -36,4 +36,18 @@ enum ShowCharacter {
             var displayedCharacter: DisplayedCharacter
         }
     }
+    
+    enum ToggleFavoriteCharacter {
+        
+        struct Request {
+        }
+        
+        struct Response {
+            var favorite: Bool
+        }
+        
+        struct ViewModel {
+            var favorite: Bool
+        }
+    }
 }

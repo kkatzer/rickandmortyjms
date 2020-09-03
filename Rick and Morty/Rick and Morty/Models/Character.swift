@@ -31,5 +31,5 @@ struct Character {
     let origin: String?
     let location: String?
     let image: String
-    let favorite: Bool
+    var favorite: Bool
 }
