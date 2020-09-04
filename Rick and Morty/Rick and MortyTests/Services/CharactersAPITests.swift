@@ -32,6 +32,8 @@ class CharactersAPITests: XCTestCase {
     func setupCharactersAPI() {
         sut = CharactersAPI()
         testCharacters = Seeds.Characters.characters
+        
+        CharactersAPI.characters = testCharacters
     }
     
     func resetCharactersAPI() {
@@ -67,7 +69,6 @@ class CharactersAPITests: XCTestCase {
     func testFetchCharacterShouldReturnCharacter() {
         //Given
         let characterToFetch = testCharacters.first!
-        CharactersAPI.characters = testCharacters
         
         //When
         var fetchedCharacter: Character?
@@ -88,7 +89,6 @@ class CharactersAPITests: XCTestCase {
     func testToggleFavoriteCharacterShouldReturnFavorite() {
         //Given
         let characterToFavorite = testCharacters.first!
-        CharactersAPI.characters = testCharacters
         
         //When
         var returnedFavorite: Bool?
