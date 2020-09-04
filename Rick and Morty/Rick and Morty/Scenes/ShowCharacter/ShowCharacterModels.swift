@@ -25,11 +25,11 @@ enum ShowCharacter {
                 var id: Int
                 var name: String
                 var status: String
-                var species: String?
-                var type: String?
-                var gender: String?
-                var origin: String?
-                var location: String?
+                var species: String
+                var type: String
+                var gender: String
+                var origin: String
+                var location: String
                 var image: String
                 var favorite: Bool
             }
